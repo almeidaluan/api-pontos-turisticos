@@ -11,6 +11,8 @@ from avaliacao.api.viewsets import AvaliacaoViewSet
 from comentarios.api.viewsets import ComentarioViewSet
 from enderecos.api.viewsets import EnderecoViewSet
 
+from rest_framework.authtoken.views import obtain_auth_token
+
 router = routers.DefaultRouter()
 router.register('pontoturistico',PontoTuristicoViewSet,base_name='PontoTuristico') # quando se usa def get_queryset voce tem que definir o basename com name do model
 router.register('Atracoes',AtracoesViewSet)
@@ -20,5 +22,6 @@ router.register('Enderecos',EnderecoViewSet,base_name='Endereco')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    path('api-token-auth/',obtain_auth_token)
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
